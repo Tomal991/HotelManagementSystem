@@ -121,7 +121,7 @@ public class CheckOut extends JFrame implements ActionListener {
             String room = t1.getText();
             String drive = t2.getText();
             String str = "delete from guest where id='" + s1 + "'";
-            String str2 = "update room set available='Available' where room_no='" + room + "'";
+            String str2 = "update room set available='Available',status='Dirty' where room_no='" + room + "'";
             String str3 = "update drivers set available ='Yes' where name='" + drive + "'";
             conn c = new conn();
             try {
