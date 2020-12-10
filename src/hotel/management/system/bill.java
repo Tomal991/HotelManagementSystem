@@ -97,6 +97,7 @@ public class bill extends JFrame implements ActionListener {
                     t1.append("\n    Amount per day/night:       " + rs.getString("price"));
                     t1.append("\n    Total Amount:                    " + rs.getString("total"));
                     t1.append("\n    your driver:                        " + rs.getString("dname"));
+                    t1.append("         time:   " + rs.getString("time"));
                     t1.append("\n-------------------------------------------------------------");
                     t1.append("\n-------------------------------------------------------------");
                     t1.append("\n         Thank you for using our service");

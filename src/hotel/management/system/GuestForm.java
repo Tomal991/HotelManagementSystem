@@ -17,14 +17,14 @@ import net.proteanit.sql.*;
 
 public class GuestForm extends JFrame {
 
-    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50;
+    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50,l70;
     JTextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t20;
     JButton b1, b2, b3;
     JRadioButton r1, r2;
     JDateChooser dateChooser1, dateChooser2;
     JSpinner js1, js2;
 
-    JComboBox c1;
+    JComboBox c1,c5;
     Choice c3, c2;
 
     GuestForm() {
@@ -135,7 +135,7 @@ public class GuestForm extends JFrame {
         c3 = new Choice();
         try {
             conn c = new conn();
-            String str = "select * from room ";
+            String str = "select * from room where available ='Available'";
             ResultSet rs = c.s.executeQuery(str);
             while (rs.next()) {
                 c3.add(rs.getString("room_no"));
@@ -164,7 +164,7 @@ public class GuestForm extends JFrame {
 
         add(l21);
         l50 = new JLabel("driver");
-        l50.setBounds(470, 265, 70, 30);
+        l50.setBounds(480, 250, 70, 30);
 
         l50.setFont(new Font("sanserif", Font.BOLD, 13));
 
@@ -177,12 +177,22 @@ public class GuestForm extends JFrame {
             while (rs.next()) {
                 c2.add(rs.getString("name"));
             }
-            c2.setBounds(550, 270, 100, 30);
+            c2.setBounds(550, 255, 100, 30);
             add(c2);
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        l70=new JLabel("time");
+        l70.setBounds(480,285,100,30);
+        
+        l70.setFont(new Font("sanserif", Font.BOLD, 13));
+        add(l70);
+        
+        c5 = new JComboBox(new String[]{"0 day","1 day", "2 day", "3 day", "4 day", "5 day"});
+        c5.setBounds(550, 290, 90, 25);
+        add(c5);
+        
 
         b1 = new JButton("Add ");
         b1.setBounds(150, 540, 100, 40);
@@ -203,7 +213,7 @@ public class GuestForm extends JFrame {
 
         add(b2);
         b3 = new JButton("Find");
-        b3.setBounds(400, 330, 70, 30);
+        b3.setBounds(390, 330, 70, 30);
         b3.setForeground(Color.WHITE);
         b3.setFont(new Font("sanserif", Font.BOLD, 13));
         b3.setBackground(Color.DARK_GRAY);
@@ -211,7 +221,7 @@ public class GuestForm extends JFrame {
         add(b3);
 
         setLayout(null);
-        setBounds(250, 30, 900, 650);
+        setBounds(280, 30, 850, 650);
         setVisible(true);
     }
 
@@ -253,8 +263,9 @@ public class GuestForm extends JFrame {
                 String d2 = ((JTextField) dateChooser2.getDateEditor().getUiComponent()).getText();
                 String total = l21.getText();
                 String driver = (String) c2.getSelectedItem();
+                String time = (String) c5.getSelectedItem();
 
-                String str = "INSERT INTO guest values( '" + id + "', '" + number + "', '" + name + "','" + gender + "', '" + country + "', '" + room + "','" + d1 + "','" + d2 + "','" + price + "','" + total + "','" + driver + "')";
+                String str = "INSERT INTO guest values( '" + id + "', '" + number + "', '" + name + "','" + gender + "', '" + country + "', '" + room + "','" + d1 + "','" + d2 + "','" + price + "','" + total + "','" + driver + "','"+time+"')";
                 String str2 = "update room set available ='Occupied' where room_no='" + room + "'";
                 String str3 = "update drivers set available ='No' where name='" + driver + "'";
                 try {
@@ -262,7 +273,7 @@ public class GuestForm extends JFrame {
                     c.s.executeUpdate(str);
                     c.s.executeUpdate(str2);
                     c.s.executeUpdate(str3);
-                    JOptionPane.showMessageDialog(null, "New Customer Added");
+                    JOptionPane.showMessageDialog(null, "New Guest Added");
                     new Reception().setVisible(true);
                     dispose();
 

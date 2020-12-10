@@ -32,7 +32,7 @@ public class CheckOut extends JFrame implements ActionListener {
             while (rs.next()) {
                 c1.add(rs.getString("id"));
             }
-            c1.setBounds(180, 100, 150, 40);
+            c1.setBounds(185, 100, 150, 40);
             add(c1);
 
         } catch (Exception e) {
@@ -48,6 +48,15 @@ public class CheckOut extends JFrame implements ActionListener {
         t1 = new JTextField();
         t1.setBounds(194, 160, 150, 35);
         add(t1);
+        l3 = new JLabel("driver");
+        l3.setBounds(80, 225, 100, 30);
+        l3.setForeground(Color.BLACK);
+        l3.setFont(new Font("sanserif", Font.BOLD, 13));
+        l3.setBackground(Color.DARK_GRAY);
+        add(l3);
+        t2 = new JTextField();
+        t2.setBounds(194, 225, 150, 30);
+        add(t2);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("hotel/management/system/icons/tick.png"));
         Image i2 = i1.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
@@ -66,7 +75,7 @@ public class CheckOut extends JFrame implements ActionListener {
         add(l5);
 
         b2 = new JButton("CheckOut");
-        b2.setBounds(100, 270, 150, 40);
+        b2.setBounds(100, 300, 150, 40);
         b2.setForeground(Color.WHITE);
         b2.setFont(new Font("sanserif", Font.BOLD, 20));
         b2.setBackground(Color.DARK_GRAY);
@@ -76,7 +85,7 @@ public class CheckOut extends JFrame implements ActionListener {
         Image i8 = i7.getImage().getScaledInstance(90, 45, Image.SCALE_DEFAULT);
         ImageIcon i9 = new ImageIcon(i8);
         b3 = new JButton(i9);
-        b3.setBounds(300, 270, 80, 40);
+        b3.setBounds(300, 300, 80, 40);
         b3.setForeground(Color.WHITE);
         b3.setFont(new Font("sanserif", Font.BOLD, 20));
         b3.setBackground(Color.DARK_GRAY);
@@ -84,7 +93,7 @@ public class CheckOut extends JFrame implements ActionListener {
         add(b3);
 
         setLayout(null);
-        setBounds(250, 100, 870, 420);
+        setBounds(250, 100, 870, 520);
         setVisible(true);
 
     }
@@ -99,6 +108,7 @@ public class CheckOut extends JFrame implements ActionListener {
                 ResultSet rs = c.s.executeQuery(str);
                 while (rs.next()) {
                     t1.setText(rs.getString("room"));
+                    t2.setText(rs.getString("dname"));
 
                 }
 
@@ -109,12 +119,15 @@ public class CheckOut extends JFrame implements ActionListener {
         if (ae.getSource() == b2) {
             String s1 = c1.getSelectedItem();
             String room = t1.getText();
+            String drive = t2.getText();
             String str = "delete from guest where id='" + s1 + "'";
             String str2 = "update room set available='Available' where room_no='" + room + "'";
+            String str3 = "update drivers set available ='Yes' where name='" + drive + "'";
             conn c = new conn();
             try {
                 c.s.executeUpdate(str);
                 c.s.executeUpdate(str2);
+                c.s.executeUpdate(str3);
                 JOptionPane.showMessageDialog(null, "CheckOut Done");
                 new Reception().setVisible(true);
                 this.setVisible(false);

@@ -9,8 +9,8 @@ import javax.swing.*;
 public class UpdateCarService extends JFrame implements ActionListener {
 
     JLabel l1, l2, l3, l4, l5;
-    JTextField t1, t2, t3, t4, t5, t6, t7, t8;
-    JButton b1, b2, b3;
+    JTextField t1, t2, t3, t4, t5, t6, t7, t8,t50;
+    JButton b1, b2, b3, b4;
     Choice c1;
 
     UpdateCarService() {
@@ -62,7 +62,7 @@ public class UpdateCarService extends JFrame implements ActionListener {
         t4 = new JTextField();
         t4.setBounds(194, 260, 156, 30);
         add(t4);
-
+       
         b1 = new JButton("Check");
         b1.setBounds(100, 350, 100, 40);
         b1.setForeground(Color.WHITE);
@@ -78,15 +78,22 @@ public class UpdateCarService extends JFrame implements ActionListener {
         b2.addActionListener(this);
         add(b2);
         b3 = new JButton("Back");
-        b3.setBounds(400, 350, 100, 40);
+        b3.setBounds(550, 350, 100, 40);
         b3.setForeground(Color.white);
         b3.setFont(new Font("sanserif", Font.BOLD, 20));
         b3.setBackground(Color.DARK_GRAY);
         b3.addActionListener(this);
         add(b3);
+        b4 = new JButton("Delete");
+        b4.setBounds(400, 350, 100, 40);
+        b4.setFont(new Font("sanserif", Font.BOLD, 20));
+        b4.setForeground(Color.WHITE);
+        b4.setBackground(Color.DARK_GRAY);
+        b4.addActionListener(this);
+        add(b4);
 
         setLayout(null);
-        setBounds(450, 80, 600, 500);
+        setBounds(450, 80, 700, 500);
         setVisible(true);
 
     }
@@ -133,6 +140,25 @@ public class UpdateCarService extends JFrame implements ActionListener {
         if (ae.getSource() == b3) {
             new carservice().setVisible(true);
             this.setVisible(false);
+        }
+        if (ae.getSource() == b4) {
+
+            String delete = t2.getText();
+
+            String sql = "delete from drivers where name = '" + delete+ "'";
+            String sql2 = "update guest set dname='null' where dname = '" + delete+ "'";
+            try {
+                conn c = new conn();
+                c.s.executeUpdate(sql);
+                c.s.executeUpdate(sql2);
+                JOptionPane.showMessageDialog(null, "The Row is Deleted !!");
+                new carservice().setVisible(true);
+                dispose();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
         }
 
     }

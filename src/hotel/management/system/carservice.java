@@ -87,15 +87,9 @@ public class carservice extends JFrame implements ActionListener {
         b2.setBackground(Color.DARK_GRAY);
         b2.addActionListener(this);
         add(b2);
-        b3 = new JButton("Delete");
-        b3.setBounds(525, 500, 100, 40);
-        b3.setFont(new Font("sanserif", Font.BOLD, 20));
-        b3.setForeground(Color.WHITE);
-        b3.setBackground(Color.DARK_GRAY);
-        b3.addActionListener(this);
-        add(b3);
+        
         b4 = new JButton("Back");
-        b4.setBounds(650, 500, 100, 40);
+        b4.setBounds(530, 500, 100, 40);
         b4.setForeground(Color.WHITE);
         b4.setFont(new Font("sanserif", Font.BOLD, 20));
         b4.setBackground(Color.DARK_GRAY);
@@ -139,23 +133,7 @@ public class carservice extends JFrame implements ActionListener {
             dispose();
 
         }
-        if (ae.getSource() == b3) {
-            
-            int row = tab1.getSelectedRow();
-            String cell = tab1.getModel().getValueAt(row, 0).toString();
-
-            String sql = "delete from drivers where model = '" + cell + "'";
-            try {
-                conn c = new conn();
-                c.s.executeUpdate(sql);
-                
-                    JOptionPane.showMessageDialog(null, "The Row is Deleted !!");
-               
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-
-        }
+        
         if (ae.getSource() == b2) {
             new UpdateCarService().setVisible(true);
             this.setVisible(false);

@@ -17,14 +17,14 @@ import net.proteanit.sql.*;
 
 public class UpdateGuest extends JFrame {
 
-    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50;
+    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50,l70;
     JTextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t20;
     JButton b1, b2, b3, b4, b5;
     JRadioButton r1, r2;
     JDateChooser dateChooser1, dateChooser2;
     JSpinner js1, js2;
 
-    JComboBox c1, c2;
+    JComboBox c1, c2,c5;
     Choice c3, c4;
 
     UpdateGuest() {
@@ -150,7 +150,7 @@ public class UpdateGuest extends JFrame {
         add(l21);
 
         l50 = new JLabel("driver");
-        l50.setBounds(420, 295, 70, 30);
+        l50.setBounds(420, 280, 70, 30);
 
         l50.setFont(new Font("sanserif", Font.BOLD, 13));
 
@@ -163,13 +163,21 @@ public class UpdateGuest extends JFrame {
             while (rs.next()) {
                 c3.add(rs.getString("name"));
             }
-            c3.setBounds(500, 300, 150, 30);
+            c3.setBounds(500, 285, 150, 30);
             add(c3);
 
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        l70=new JLabel("time");
+        l70.setBounds(420,320,100,30);
+        
+        l70.setFont(new Font("sanserif", Font.BOLD, 13));
+        add(l70);
+        
+        c5 = new JComboBox(new String[]{"0 day","1 day", "2 day", "3 day", "4 day", "5 day"});
+        c5.setBounds(500, 325, 90, 25);
+        add(c5);
         b1 = new JButton("Check");
         b1.setBounds(150, 540, 100, 40);
         b1.setForeground(Color.WHITE);
@@ -186,12 +194,19 @@ public class UpdateGuest extends JFrame {
         b2.addActionListener(new ab());
         add(b2);
         b3 = new JButton("Back");
-        b3.setBounds(500, 540, 100, 40);
+        b3.setBounds(620, 540, 100, 40);
         b3.setForeground(Color.WHITE);
         b3.setFont(new Font("sanserif", Font.BOLD, 20));
         b3.setBackground(Color.DARK_GRAY);
         b3.addActionListener(new ab());
         add(b3);
+        b4 = new JButton("Delete");
+        b4.setBounds(480, 540, 100, 40);
+        b4.setForeground(Color.WHITE);
+        b4.setFont(new Font("sanserif", Font.BOLD, 20));
+        b4.setBackground(Color.DARK_GRAY);
+        b4.addActionListener(new ab());
+        add(b4);
 
         setLayout(null);
         setBounds(250, 30, 900, 650);
@@ -233,7 +248,7 @@ public class UpdateGuest extends JFrame {
 
                 String room = c4.getSelectedItem();
                 String driver = c3.getSelectedItem();
-
+                String time = (String)c5.getSelectedItem();
                 String type = t1.getText();
                 String name = t3.getText();
                 String gender = t4.getText();
@@ -243,10 +258,11 @@ public class UpdateGuest extends JFrame {
                 String checkIN = t8.getText();
                 String checkOUT = t9.getText();
                 String total = l21.getText();
+                
 
                 conn c = new conn();
                 try {
-                    String str = "update guest set id_type='" + type + "',name='" + name + "',gender='" + gender + "',country='" + country + "',room='" + room + "',check_IN='" + checkIN + "',check_OUT ='" + checkOUT + "',price='" + price + "',total='" + total + "',dname='" + driver + "' where room='" + room + "'";
+                    String str = "update guest set id_type='" + type + "',name='" + name + "',gender='" + gender + "',country='" + country + "',room='" + room + "',check_IN='" + checkIN + "',check_OUT ='" + checkOUT + "',price='" + price + "',total='" + total + "',dname='" + driver + "',time='"+time+"' where room='" + room + "'";
 
                     c.s.executeUpdate(str);
                     JOptionPane.showMessageDialog(null, "Guest Updated successfully");
@@ -261,6 +277,25 @@ public class UpdateGuest extends JFrame {
                 new GuestInfo().setVisible(true);
                 dispose();
             }
+            if (ae.getSource() == b4) {
+
+            String delete = t2.getText();
+            String room=c4.getSelectedItem();
+            String sql = "delete from guest where id = '" + delete+ "'";
+            String sql2 = "update room set available='Available' where room_no = '" + room+ "'";
+            try {
+                conn c = new conn();
+                c.s.executeUpdate(sql);
+                 c.s.executeUpdate(sql2);
+                JOptionPane.showMessageDialog(null, "The Row is Deleted !!");
+                new GuestInfo().setVisible(true);
+                dispose();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+        }
         }
     }
 
