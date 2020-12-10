@@ -16,10 +16,14 @@ public class RoomInfo extends JFrame implements ActionListener {
     RoomInfo() {
         super("Room Info");
         tab1 = new JTable();
-        tab1.setBounds(0, 40, 870, 400);
         add(tab1);
+        
+        JScrollPane pane = new JScrollPane(tab1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pane.setBounds(0, 41, 870, 400);
 
-        l1 = new JLabel("Room number");
+        add(pane);
+
+        /*l1 = new JLabel("Room number");
         l1.setBounds(40, 10, 100, 30);
         add(l1);
         l2 = new JLabel("Available");
@@ -33,8 +37,7 @@ public class RoomInfo extends JFrame implements ActionListener {
         add(l4);
         l5 = new JLabel("Price");
         l5.setBounds(750, 10, 100, 30);
-        add(l5);
-
+        add(l5);*/
         b1 = new JButton("Load Data");
         b1.setBounds(225, 470, 130, 40);
         b1.setForeground(Color.WHITE);
@@ -75,7 +78,7 @@ public class RoomInfo extends JFrame implements ActionListener {
         add(b5);
 
         setLayout(null);
-        setBounds(300, 70, 870, 600);
+        setBounds(300, 70, 890, 600);
         setVisible(true);
 
     }

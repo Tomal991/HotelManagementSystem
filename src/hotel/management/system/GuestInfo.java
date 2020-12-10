@@ -16,10 +16,13 @@ public class GuestInfo extends JFrame implements ActionListener {
         super("Guest Info");
 
         tab1 = new JTable();
-        tab1.setBounds(0, 40, 920, 400);
         add(tab1);
-
-        l1 = new JLabel("Type");
+        
+        JScrollPane pane = new JScrollPane(tab1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pane.setBounds(0, 41, 930, 400);
+        add(pane);
+        
+        /*l1 = new JLabel("Type");
         l1.setBounds(15, 10, 100, 30);
         add(l1);
         l2 = new JLabel("ID");
@@ -54,7 +57,7 @@ public class GuestInfo extends JFrame implements ActionListener {
         add(l11);
         l12 = new JLabel("time");
         l12.setBounds(860, 10, 100, 30);
-        add(l12);
+        add(l12);*/
 
         b1 = new JButton("Load Data");
         b1.setBounds(150, 485, 130, 40);
@@ -83,7 +86,7 @@ public class GuestInfo extends JFrame implements ActionListener {
         add(b4);
 
         setLayout(null);
-        setBounds(250, 40, 930, 600);
+        setBounds(250, 40, 950, 600);
         setVisible(true);
 
     }
