@@ -17,14 +17,14 @@ import net.proteanit.sql.*;
 
 public class UpdateGuest extends JFrame {
 
-    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50,l70;
+    JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l15, l20, l21, l50, l70;
     JTextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t20;
     JButton b1, b2, b3, b4, b5;
     JRadioButton r1, r2;
     JDateChooser dateChooser1, dateChooser2;
     JSpinner js1, js2;
 
-    JComboBox c1, c2,c5;
+    JComboBox c1, c2, c5;
     Choice c3, c4;
 
     UpdateGuest() {
@@ -169,13 +169,13 @@ public class UpdateGuest extends JFrame {
         } catch (Exception e) {
             System.out.println(e);
         }
-        l70=new JLabel("time");
-        l70.setBounds(420,320,100,30);
-        
+        l70 = new JLabel("time");
+        l70.setBounds(420, 320, 100, 30);
+
         l70.setFont(new Font("sanserif", Font.BOLD, 13));
         add(l70);
-        
-        c5 = new JComboBox(new String[]{"0 day","1 day", "2 day", "3 day", "4 day", "5 day"});
+
+        c5 = new JComboBox(new String[]{"0 day", "1 day", "2 day", "3 day", "4 day", "5 day"});
         c5.setBounds(500, 325, 90, 25);
         add(c5);
         b1 = new JButton("Check");
@@ -248,7 +248,7 @@ public class UpdateGuest extends JFrame {
 
                 String room = c4.getSelectedItem();
                 String driver = c3.getSelectedItem();
-                String time = (String)c5.getSelectedItem();
+                String time = (String) c5.getSelectedItem();
                 String type = t1.getText();
                 String name = t3.getText();
                 String gender = t4.getText();
@@ -258,13 +258,13 @@ public class UpdateGuest extends JFrame {
                 String checkIN = t8.getText();
                 String checkOUT = t9.getText();
                 String total = l21.getText();
-                
 
                 conn c = new conn();
                 try {
-                    String str = "update guest set id_type='" + type + "',name='" + name + "',gender='" + gender + "',country='" + country + "',room='" + room + "',check_IN='" + checkIN + "',check_OUT ='" + checkOUT + "',price='" + price + "',total='" + total + "',dname='" + driver + "',time='"+time+"' where room='" + room + "'";
-
+                    String str = "update guest set id_type='" + type + "',name='" + name + "',gender='" + gender + "',country='" + country + "',room='" + room + "',check_IN='" + checkIN + "',check_OUT ='" + checkOUT + "',price='" + price + "',total='" + total + "',dname='" + driver + "',time='" + time + "' where room='" + room + "'";
+                    String str2 = "update drivers set available ='No' where name='" + driver + "'";
                     c.s.executeUpdate(str);
+                    c.s.executeUpdate(str2);
                     JOptionPane.showMessageDialog(null, "Guest Updated successfully");
                     new GuestInfo().setVisible(true);
                     dispose();
@@ -279,23 +279,23 @@ public class UpdateGuest extends JFrame {
             }
             if (ae.getSource() == b4) {
 
-            String delete = t2.getText();
-            String room=c4.getSelectedItem();
-            String sql = "delete from guest where id = '" + delete+ "'";
-            String sql2 = "update room set available='Available' where room_no = '" + room+ "'";
-            try {
-                conn c = new conn();
-                c.s.executeUpdate(sql);
-                 c.s.executeUpdate(sql2);
-                JOptionPane.showMessageDialog(null, "The Row is Deleted !!");
-                new GuestInfo().setVisible(true);
-                dispose();
+                String delete = t2.getText();
+                String room = c4.getSelectedItem();
+                String sql = "delete from guest where id = '" + delete + "'";
+                String sql2 = "update room set available='Available' where room_no = '" + room + "'";
+                try {
+                    conn c = new conn();
+                    c.s.executeUpdate(sql);
+                    c.s.executeUpdate(sql2);
+                    JOptionPane.showMessageDialog(null, "The Row is Deleted !!");
+                    new GuestInfo().setVisible(true);
+                    dispose();
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+
             }
-
-        }
         }
     }
 
