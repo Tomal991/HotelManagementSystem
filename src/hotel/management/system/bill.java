@@ -120,7 +120,7 @@ public class bill extends JFrame implements ActionListener {
             } catch (Exception e) {
 
             }
-            this.setVisible(false);
+            
         }
     }
 

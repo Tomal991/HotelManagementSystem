@@ -1,0 +1,7 @@
+create table guest(id_type varchar(20),id varchar(20),name varchar(20),gender varchar(20),country varchar(20),room varchar(20),check_IN varchar(20),check_OUT varchar(20),price varchar(20),total varchar(20),dname varchar(20),time varchar(20));
+
+create table room(room_no varchar(20),available varchar(20),status varchar(20),room_type varchar(20),price varchar(20));
+create table emoloyee(name varchar(20),age varchar(20),gender varchar(20),job varchar(20),salary varchar(20),phone varchar(20),nid varchar(20),email varchar(20));
+
+create table drivers(name varchar(20),age varchar(20),gender varchar(20), company varchar(20),model varchar(20),available varchar(20));
+
