@@ -4,4 +4,6 @@ create table room(room_no varchar(20),available varchar(20),status varchar(20),r
 create table emoloyee(name varchar(20),age varchar(20),gender varchar(20),job varchar(20),salary varchar(20),phone varchar(20),nid varchar(20),email varchar(20));
 
 create table drivers(name varchar(20),age varchar(20),gender varchar(20), company varchar(20),model varchar(20),available varchar(20));
+create table login(username varchar(20),password varchar(20));
+insert into login values("admin","tomal991");
 
