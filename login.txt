@@ -1,2 +1,2 @@
-username - admin
-pass - tomal991
+username - root
+pass - root
