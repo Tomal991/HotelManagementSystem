@@ -1,7 +1,7 @@
 # HotelManagementSystem
 This project is for management of a Hotel. The project manages and maintains the records of guests and rooms and billings in the hotel. 
 
-**Features**
+-**Features**
 -There is only on module- administrator/Receptionist login. 
 -He / She has to login to software with his/her user-id and password.
 -Entry of guests details
