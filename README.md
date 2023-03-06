@@ -12,6 +12,4 @@ This project is for management of a Hotel. The project manages and maintains the
 - Car service is available all time.
 - Track of all food of guest and their details are stored
 
-
-
-username - root , pass - root
+Technology used-Java Swing-GUI, MySQL
